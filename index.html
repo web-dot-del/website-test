@@ -1,0 +1,682 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peak Sunrise Consultants</title>
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a365d',
+                        secondary: '#2b6cb0',
+                        accent: '#f97316',
+                        light: '#f8fafc',
+                        dark: '#1e293b'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .bg-gradient {
+                background: linear-gradient(135deg, theme('colors.primary'), theme('colors.secondary'));
+            }
+            .transition-all-300 {
+                transition: all 0.3s ease;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1;
+            }
+        }
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/905601551000666198~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1788140924&x-signature=f%2Bt7QCfXnt6B3edZbL8xUiOsmRw%3D');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #f97316;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .team-member img {
+            transition: all 0.5s ease;
+        }
+        
+        .team-member:hover img {
+            transform: scale(1.05);
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: #f97316;
+        }
+        
+        .counter-box {
+            transition: all 0.3s ease;
+        }
+        
+        .counter-box:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="font-sans text-dark bg-light">
+    <!-- Header/Navigation -->
+    <header class="fixed w-full bg-white shadow-md z-50">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/cd05f7c5e5fa450ab268ce0c8b736ca8.png~tplv-a9rns2rl98-24:720:720.png?lk3s=8e244e95&amp;rcl=202603040953047E0C8358E0FF31DFBC65&amp;rrcfp=8a172a1a&amp;x-expires=1773193984&amp;x-signature=xW86UDHEMmLhuBpKBhYAUv08pEg%3D" alt="Peak Sunrise Consultants Logo" class="h-14 mr-3">
+                <span class="text-lg font-semibold text-primary hidden md:block">Peak Sunrise Consultants</span>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link active font-medium text-primary hover:text-accent transition-all-300">Home</a>
+                <a href="#about" class="nav-link font-medium text-primary hover:text-accent transition-all-300">About Us</a>
+                <a href="#services" class="nav-link font-medium text-primary hover:text-accent transition-all-300">Services</a>
+            </div>
+            
+            <!-- Mobile Navigation Toggle -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-primary focus:outline-none">
+                    <i class="fa fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#home" class="mobile-nav-link py-2 px-4 text-primary hover:bg-gray-100 rounded-md">Home</a>
+                <a href="#about" class="mobile-nav-link py-2 px-4 text-primary hover:bg-gray-100 rounded-md">About Us</a>
+                <a href="#services" class="mobile-nav-link py-2 px-4 text-primary hover:bg-gray-100 rounded-md">Services</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section min-h-screen flex items-center pt-16">
+        <div class="container mx-auto px-4 py-16">
+            <div class="max-w-3xl mx-auto text-center" data-aos="fade-up" data-aos-duration="1000">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 text-shadow">
+                    Global Consulting Solutions for a Changing World
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-200 mb-8">
+                    Empowering businesses with strategic insights and innovative solutions
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#services" class="bg-accent hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-md transition-all-300 shadow-lg">
+                        Our Services
+                    </a>
+                    <a href="#contact" class="bg-transparent border-2 border-white hover:bg-white hover:text-primary font-medium py-3 px-6 rounded-md transition-all-300">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">About Us</h2>
+                <div class="w-24 h-1 bg-accent mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right" data-aos-duration="800">
+                    <img src="https://p3-doubao-search-sign.byteimg.com/isp-i18n-media/img/3c7c12b01540344351e9be67e53bb885~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&amp;x-expires=1788140924&amp;x-signature=sQgLURwhXq2RUJ1vlF%2BcQyRSRU0%3D" alt="Modern Office Building" class="rounded-lg shadow-xl w-full h-auto">
+                </div>
+                
+                <div data-aos="fade-left" data-aos-duration="800">
+                    <h3 class="text-2xl font-bold text-primary mb-4">Our Story</h3>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Founded in 2025, Peak Sunrise Consultants is headquartered in the "Garden City" of Singapore. Leveraging Singapore's strategic position as a global financial and trade hub, we've built an international service network that enables seamless integration of global resources with localized execution.
+                    </p>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        As a professional consulting firm specializing in high-end advisory services, we focus on three core business areas: Technology Consulting, Economic Consulting, and Policy Consulting. Our approach combines international perspective with local insights to deliver tailored solutions that drive client success.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mr-3">
+                                <i class="fa fa-globe text-xl"></i>
+                            </div>
+                            <div data-aos="fade-up">
+                                <h4 class="font-semibold">Global Reach</h4>
+                                <p class="text-sm text-gray-600">International network</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mr-3">
+                                <i class="fa fa-lightbulb-o text-xl"></i>
+                            </div>
+                            <div data-aos="fade-up">
+                                <h4 class="font-semibold">Innovative Solutions</h4>
+                                <p class="text-sm text-gray-600">Tailored strategies</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mr-3">
+                                <i class="fa fa-users text-xl"></i>
+                            </div>
+                            <div data-aos="fade-up">
+                                <h4 class="font-semibold">Expert Team</h4>
+                                <p class="text-sm text-gray-600">Industry specialists</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mission & Vision -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20">
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white mr-4">
+                            <i class="fa fa-bullseye text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-primary">Our Mission</h3>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        To serve as a bridge through professional consulting, integrating global technology, economic, and policy resources. We empower clients to overcome information barriers and geographical limitations, focusing on core business development and maximizing value. Through an open ecosystem, we gather global wisdom to build an international consulting service platform with both depth and breadth.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white mr-4">
+                            <i class="fa fa-eye text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-primary">Our Vision</h3>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        To become a globally leading benchmark consulting firm, earning client trust through keen industry insights, reliable service quality, and continuous innovation. We aim to accompany clients of all types in their steady development amid the tide of globalization, achieving the synergistic enhancement of business value and social value.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Global Network -->
+            <div class="mt-20" data-aos="fade-up">
+                <div class="text-center mb-10">
+                    <h3 class="text-2xl font-bold text-primary mb-4">Our Global Network</h3>
+                    <p class="text-gray-700 max-w-3xl mx-auto">
+                        With strategic locations in key global business hubs, we provide seamless consulting services across continents
+                    </p>
+                </div>
+                <div class="relative">
+                    <img src="https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1018297782090727430~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&amp;x-expires=1788140924&amp;x-signature=DhPL9M%2Byprk3Pn1aw8kTaqDN71g%3D" alt="Global Business Network" class="w-full h-auto rounded-lg shadow-lg">
+                    <div class="absolute inset-0 bg-black bg-opacity-20 rounded-lg"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">Our Services</h2>
+                <p class="text-gray-700 max-w-3xl mx-auto">
+                    We offer comprehensive consulting services tailored to meet the unique needs of each client, helping them navigate complex business challenges and seize opportunities.
+                </p>
+
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Technology Consulting -->
+                <div class="bg-white rounded-lg shadow-card p-8 service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-microchip text-3xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-4">Technology Consulting</h3>
+                    <p class="text-gray-700 mb-6">
+                        Focused on cutting-edge fields such as artificial intelligence, green technology, biomedicine, and semiconductors, we provide technology trend analysis, industrialization path planning, and cross-border technology cooperation matching services.
+                    </p>
+                    <ul class="mb-6 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                            <span>Technology trend forecasting</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                            <span>Industrialization roadmap development</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                            <span>Cross-border technology collaboration</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                            <span>High-potential sector identification</span>
+                        </li>
+                    </ul>
+                    <a href="#contact" class="inline-block text-accent hover:text-primary font-medium transition-all-300">
+                        Learn More <i class="fa fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                
+                <!-- Economic Consulting -->
+                <div class="bg-white rounded-lg shadow-card p-8 service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-line-chart text-3xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-4">Economic Consulting</h3>
+                    <p class="text-gray-700 mb-6">
+                        Centered around cross-border investment strategies, industrial chain value analysis, regional economic cycle research, and market potential assessment, we combine data modeling with on-site research to provide scientific basis for global resource allocation.
+                    </p>
+                    <ul class="mb-6 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                            <span>Cross-border investment strategy</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                            <span>Industry chain value analysis</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                            <span>Regional economic cycle research</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                            <span>Market entry risk assessment</span>
+                        </li>
+                    </ul>
+                    <a href="#contact" class="inline-block text-accent hover:text-primary font-medium transition-all-300">
+                        Learn More <i class="fa fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                
+                <!-- Policy Consulting -->
+                <div class="bg-white rounded-lg shadow-card p-8 service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-balance-scale text-3xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-4">Policy Consulting</h3>
+                    <p class="text-gray-700 mb-6">
+                        Leveraging our team's in-depth research on policies in major economies such as the EU, US, and Japan, we provide real-time interpretation of industrial regulatory policies, trade barrier rules, market access standards, and subsidy policies.
+                    </p>
+                    <ul class="mb-6 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                            <span>Policy compliance assessment</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                            <span>Risk avoidance strategies</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                            <span>Regulatory policy tracking</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-accent mt-1 mr-2"></i>
+                            <span>Policy benefit identification</span>
+                        </li>
+                    </ul>
+                    <a href="#contact" class="inline-block text-accent hover:text-primary font-medium transition-all-300">
+                        Learn More <i class="fa fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Consulting Approach -->
+            <div class="mt-20" data-aos="fade-up">
+                <div class="text-center mb-10">
+                    <h3 class="text-2xl font-bold text-primary mb-4">Our Consulting Approach</h3>
+                    <p class="text-gray-700 max-w-3xl mx-auto">
+                        We adhere to a "customized solution" philosophy, rejecting standardized template outputs. For each client, we integrate our three core business capabilities to form a comprehensive service package.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-search text-2xl text-primary"></i>
+                        </div>
+                        <h4 class="font-bold text-primary mb-2">Initial Research</h4>
+                        <p class="text-gray-700 text-sm">
+                            In-depth analysis of client needs and market conditions
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-pencil text-2xl text-primary"></i>
+                        </div>
+                        <h4 class="font-bold text-primary mb-2">Solution Design</h4>
+                        <p class="text-gray-700 text-sm">
+                            Tailored strategy development based on specific requirements
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center" data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-cogs text-2xl text-primary"></i>
+                        </div>
+                        <h4 class="font-bold text-primary mb-2">Implementation</h4>
+                        <p class="text-gray-700 text-sm">
+                            Careful execution with continuous monitoring and adjustment
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center" data-aos="fade-up" data-aos-delay="400">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa fa-refresh text-2xl text-primary"></i>
+                        </div>
+                        <h4 class="font-bold text-primary mb-2">Optimization</h4>
+                        <p class="text-gray-700 text-sm">
+                            Dynamic refinement to ensure sustained value creation
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Client Testimonials -->
+            <div class="mt-20" data-aos="fade-up">
+                <div class="text-center mb-10">
+                    <h3 class="text-2xl font-bold text-primary mb-4">What Our Clients Say</h3>
+                    <p class="text-gray-700 max-w-3xl mx-auto">
+                        Hear from businesses that have transformed their operations with our consulting services
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-white rounded-lg shadow-md p-8 card-hover" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex items-center mb-6">
+                            <div class="text-accent">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic mb-6">
+                            "Peak Sunrise Consultants provided invaluable insights for our technology expansion strategy. Their team's deep understanding of market trends and regulatory requirements helped us navigate complex international markets with confidence."
+                        </p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-user text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary">Technology Sector Client</h4>
+                                <p class="text-gray-600 text-sm">Global Technology Company</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="bg-white rounded-lg shadow-md p-8 card-hover" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex items-center mb-6">
+                            <div class="text-accent">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic mb-6">
+                            "Their economic consulting team delivered a comprehensive analysis of our global supply chain that identified significant cost-saving opportunities. The strategic recommendations were practical and immediately implementable."
+                        </p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-user text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary">Manufacturing Sector Client</h4>
+                                <p class="text-gray-600 text-sm">International Manufacturing Group</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="bg-white rounded-lg shadow-md p-8 card-hover" data-aos="fade-up" data-aos-delay="300">
+                        <div class="flex items-center mb-6">
+                            <div class="text-accent">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic mb-6">
+                            "Navigating international trade policies was becoming increasingly complex for our business. Peak Sunrise's policy consulting team provided clear guidance and proactive strategies that minimized risks and maximized opportunities."
+                        </p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-user text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary">Trade Sector Client</h4>
+                                <p class="text-gray-600 text-sm">International Trading Company</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div data-aos="fade-up">
+                    <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/cd05f7c5e5fa450ab268ce0c8b736ca8.png~tplv-a9rns2rl98-24:720:720.png?lk3s=8e244e95&amp;rcl=202603040953047E0C8358E0FF31DFBC65&amp;rrcfp=8a172a1a&amp;x-expires=1773193984&amp;x-signature=xW86UDHEMmLhuBpKBhYAUv08pEg%3D" alt="Peak Sunrise Consultants Logo" class="h-14 mb-4">
+                    <p class="text-gray-300 mb-6">
+                        Peak Sunrise Consultants 
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-accent social-icon">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-accent social-icon">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-accent social-icon">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-accent social-icon">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div data-aos="fade-up">
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-300 hover:text-accent transition-all-300">Home</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-accent transition-all-300">About Us</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-accent transition-all-300">Our Services</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-accent transition-all-300">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div data-aos="fade-up">
+                    <h4 class="text-lg font-semibold mb-4">Our Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#services" class="text-gray-300 hover:text-accent transition-all-300">Technology Consulting</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-accent transition-all-300">Economic Consulting</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-accent transition-all-300">Policy Consulting</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-accent transition-all-300">Customized Solutions</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-accent transition-all-300">Global Network</a></li>
+                    </ul>
+                </div>
+                
+                <div data-aos="fade-up">
+                    <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fa fa-map-marker mt-1 mr-3 text-accent"></i>
+                            <span class="text-gray-300">1 Raffles Place, #25-01, Singapore 048616</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-envelope mt-1 mr-3 text-accent"></i>
+                            <span class="text-gray-300">info@peaksunrise.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-phone mt-1 mr-3 text-accent"></i>
+                            <span class="text-gray-300">+65 6222 8888</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-clock-o mt-1 mr-3 text-accent"></i>
+                            <span class="text-gray-300">Mon-Fri: 9:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-10 pt-8 text-center">
+                <p class="text-gray-400">© 2025 Peak Sunrise Consultants. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white shadow-lg opacity-0 invisible transition-all duration-300 z-50">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize AOS Animation Library
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Mobile Navigation Links
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+            
+            // Active Navigation Link
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // Back to Top Button
+                const backToTopButton = document.getElementById('back-to-top');
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                    backToTopButton.classList.add('opacity-0', 'invisible');
+                }
+            });
+            
+            // Back to Top Button Click
+            document.getElementById('back-to-top').addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // No contact form submission needed as form has been removed
+            
+
+        });
+    </script>
+
+</body></html>
